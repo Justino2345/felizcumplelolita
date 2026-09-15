@@ -196,7 +196,6 @@ function TopMenuBar({ openApp }) {
 }
 
 export default function App() {
-  const [booted, setBooted] = useState(false);
   const [wins, setWins] = useState([]);
   const [zTop, setZTop] = useState(200);
   const [animals, setAnimals] = useState(false);
@@ -204,11 +203,6 @@ export default function App() {
   const view = useViewport();
   const { isMobile } = view;
   const dragRef = useRef({ id: null, moved: false });
-
-  useEffect(() => {
-    const t = setTimeout(() => setBooted(true), 5000); // dura lo mismo que /pantalla de carga.mp4
-    return () => clearTimeout(t);
-  }, []);
 
   const focus = useCallback((key) => {
     setZTop((z) => {
@@ -340,26 +334,6 @@ export default function App() {
       <WarpBackground />
       <DesktopBackdrop />
 
-      {/* Boot screen */}
-      <AnimatePresence>
-        {!booted && (
-          <motion.div
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.55 }}
-            className="absolute inset-0 z-[999] grid place-items-center overflow-hidden"
-            style={{ background: WALLPAPER }}
-          >
-            <video
-              className="pointer-events-none h-full w-full object-cover"
-              src="/pantalla de carga.mp4"
-              autoPlay
-              muted
-              playsInline
-              aria-hidden="true"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Menu bar (MacOSMenuBar) */}
       <TopMenuBar openApp={openApp} />
