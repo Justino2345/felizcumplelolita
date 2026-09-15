@@ -89,30 +89,6 @@ body,
   }
 }
 
-/* pantalla de carga: "feliz cumple" se revela de izq a der como un trazo (App.jsx) */
-@keyframes fcReveal {
-  from {
-    clip-path: inset(0 100% 0 -1%);
-    -webkit-clip-path: inset(0 100% 0 -1%);
-  }
-  to {
-    clip-path: inset(0 -3% 0 -1%);
-    -webkit-clip-path: inset(0 -3% 0 -1%);
-  }
-}
-@keyframes fcNib {
-  from {
-    transform: translateX(0);
-    opacity: 0.85;
-  }
-  90% {
-    opacity: 0.85;
-  }
-  to {
-    transform: translateX(628px);
-    opacity: 0;
-  }
-}
 
 /* meneo sutil de la caca pixel-art (os/Critters.jsx -> PoopSprite) */
 @keyframes poopJiggle {
