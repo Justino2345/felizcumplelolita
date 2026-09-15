@@ -552,10 +552,7 @@ export function MusicApp() {
           }}
         />
         <div>
-          <div className="text-xs uppercase tracking-widest text-white/50">
-            La banda de sonido de su vida
-          </div>
-          <div className="text-xl font-semibold">Playlist de cumpleaños</div>
+          <div className="text-xl font-semibold">Lolitas' playlist</div>
         </div>
       </div>
       <div className="mac-scroll flex-1 overflow-y-auto px-4 pb-4">

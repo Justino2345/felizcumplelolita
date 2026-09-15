@@ -182,7 +182,12 @@ const MENU_ACTIONS = new Set([
 
 function TopMenuBar({ openApp }) {
   return (
-    <div className="fixed inset-x-0 top-0 z-[550]">
+    <motion.div
+      initial={{ opacity: 0, y: -16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="fixed inset-x-0 top-0 z-[550]"
+    >
       <MacOSMenuBar
         appName={PERSON.menuName}
         menus={MENU_BAR}
@@ -191,7 +196,7 @@ function TopMenuBar({ openApp }) {
           if (MENU_ACTIONS.has(action)) openApp(action);
         }}
       />
-    </div>
+    </motion.div>
   );
 }
 
@@ -338,12 +343,15 @@ export default function App() {
       {/* Menu bar (MacOSMenuBar) */}
       <TopMenuBar openApp={openApp} />
 
-      {/* Desktop icons (arrastrables) */}
-      {iconLayout.map((ic) => {
+      {/* Desktop icons (arrastrables) — aparecen escalonados en vez de mostrarse de golpe */}
+      {iconLayout.map((ic, i) => {
         const p = iconPos[ic.id];
         return (
-          <button
+          <motion.button
             key={ic.id}
+            initial={{ opacity: 0, y: 10, scale: 0.92 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.35, delay: 0.15 + i * 0.035, ease: "easeOut" }}
             data-cursor="grab"
             onPointerDown={(e) => startIconDrag(e, ic.id)}
             onClick={() => isMobile && activateIcon(ic.id)}
@@ -359,7 +367,7 @@ export default function App() {
               )}
             </span>
             <span className="line-clamp-2 leading-tight">{ic.label}</span>
-          </button>
+          </motion.button>
         );
       })}
 
@@ -416,7 +424,12 @@ export default function App() {
       {/* Barra de navegación — GlassDock (efecto liquid glass). Como en una
           Mac real, el Dock siempre queda visible y clickeable por encima de
           las ventanas abiertas. */}
-      <div className="absolute inset-x-0 bottom-2 z-[450] flex justify-center px-2 sm:bottom-3">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+        className="absolute inset-x-0 bottom-2 z-[450] flex justify-center px-2 sm:bottom-3"
+      >
         <GlassDock
           icons={DOCK.map((d) => ({
             src: d.icon,
@@ -431,7 +444,7 @@ export default function App() {
             },
           }))}
         />
-      </div>
+      </motion.div>
 
       <GlassFilter />
       <MacCursor />
