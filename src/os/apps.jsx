@@ -15,6 +15,12 @@ import { LightboxImg } from "./Lightbox.jsx";
 // Video de los 15 en YouTube.
 const REEL_YOUTUBE_URL = "https://www.youtube.com/watch?v=jRPGP3eLIA4";
 
+// "Descarga tu cartita" (capítulo Justino): pedí la contraseña y, si es
+// correcta, descarga este PDF. Poné acá la ruta cuando subas el archivo
+// (ej: "/cartita.pdf" con el PDF en public/cartita.pdf).
+const CARTITA_PDF_URL = "";
+const CARTITA_PASSWORD = "chesushi";
+
 function youtubeEmbedUrl(url) {
   const id = url?.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)?.[1];
   return id ? `https://www.youtube-nocookie.com/embed/${id}` : null;
@@ -119,7 +125,118 @@ export function AboutApp({ openChapter }) {
   );
 }
 
-export function ChapterApp({ chapterId }) {
+// Link "Descarga tu cartita ↗" (solo en el capítulo de Justino/amor): abre un
+// cuadro con un campo de contraseña; si coincide, descarga el PDF.
+function CartitaLink() {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+  const [wrong, setWrong] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
+
+  const close = () => {
+    setOpen(false);
+    setValue("");
+    setWrong(false);
+    setUnlocked(false);
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    if (value.trim().toLowerCase() === CARTITA_PASSWORD) {
+      setWrong(false);
+      setUnlocked(true);
+      if (CARTITA_PDF_URL) {
+        const a = document.createElement("a");
+        a.href = CARTITA_PDF_URL;
+        a.download = "";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+    } else {
+      setWrong(true);
+    }
+  };
+
+  return (
+    <>
+      <button
+        type="button"
+        data-cursor="pointer"
+        onClick={() => setOpen(true)}
+        className="ml-2 align-middle text-sm font-medium text-black/50 underline decoration-black/25 underline-offset-4 transition hover:text-black/70"
+      >
+        Descarga tu cartita ↗
+      </button>
+      {open &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            onClick={close}
+            data-cursor="pointer"
+            style={{ animation: "lightboxIn 0.15s ease-out" }}
+            className="fixed inset-0 z-[2147483600] grid place-items-center bg-black/70 p-6 backdrop-blur-sm"
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              style={{ animation: "lightboxZoom 0.18s ease-out" }}
+              className="w-full max-w-sm cursor-auto rounded-2xl bg-white p-6 text-center shadow-2xl"
+            >
+              {unlocked ? (
+                <>
+                  <div className="text-3xl">💌</div>
+                  <h2 className="mt-3 text-lg font-bold text-[#08060d]">
+                    ¡Acertaste!
+                  </h2>
+                  <p className="mt-2 text-sm text-[#6b6375]">
+                    {CARTITA_PDF_URL
+                      ? "Tu cartita se está descargando."
+                      : "Todavía no se subió el PDF de la cartita."}
+                  </p>
+                </>
+              ) : (
+                <form onSubmit={submit}>
+                  <h2 className="text-lg font-bold text-[#08060d]">Tu cartita</h2>
+                  <p className="mt-2 text-sm text-[#6b6375]">
+                    Contraseña= lugar que siempre pedimos sushi
+                  </p>
+                  <input
+                    type="password"
+                    autoFocus
+                    value={value}
+                    onChange={(e) => {
+                      setValue(e.target.value);
+                      setWrong(false);
+                    }}
+                    placeholder="Contraseña"
+                    className={`mt-4 w-full rounded-xl border px-4 py-3 text-center outline-none focus:border-black/30 ${
+                      wrong ? "border-red-300" : "border-[#e5e4e7]"
+                    }`}
+                  />
+                  {wrong && (
+                    <p className="mt-2 text-sm text-red-500">
+                      No es esa. Probá de nuevo.
+                    </p>
+                  )}
+                  <button
+                    type="submit"
+                    data-cursor="pointer"
+                    className="mt-4 w-full rounded-xl bg-[#08060d] px-5 py-3 font-semibold text-white transition hover:brightness-110"
+                  >
+                    Entrar
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>,
+          document.body
+        )}
+    </>
+  );
+}
+
+export function ChapterApp({ chapterId, openApp }) {
   const c = CHAPTERS.find((x) => x.id === chapterId) ?? CHAPTERS[0];
   return (
     <div className="text-[#6b6375]">
@@ -129,7 +246,18 @@ export function ChapterApp({ chapterId }) {
       >
         <div>
           <div className="text-sm font-medium text-black/60">{c.year}</div>
-          <h1 className="text-3xl font-semibold text-black/80">{c.name}</h1>
+          <h1 className="inline text-3xl font-semibold text-black/80">{c.name}</h1>
+          {c.id === "amor" && <CartitaLink />}
+          {c.id === "hoy" && (
+            <button
+              type="button"
+              data-cursor="pointer"
+              onClick={() => openApp?.("contact")}
+              className="ml-2 align-middle text-sm font-medium text-black/50 underline decoration-black/25 underline-offset-4 transition hover:text-black/70"
+            >
+              Ver los saludos ↗
+            </button>
+          )}
           <p className="text-black/60">{c.subtitle}</p>
         </div>
       </div>

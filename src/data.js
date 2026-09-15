@@ -102,10 +102,10 @@ export const CHAPTERS = [
     get cover() {
       return coverDe(this.id, this.gallery);
     },
-    intro: "Los amigos que siguen estando.",
+    intro: "falta texto",
     body: [
-      "El secundario, el primer grupo de amigos, la música de esos años, el primer trabajo.",
-      "Ese verano que nadie se olvida.",
+      "falta texto",
+      "falta texto",
     ],
     gallery: fotosDe("adolescencia", [
       "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop",
@@ -132,7 +132,7 @@ export const CHAPTERS = [
   {
     id: "amor",
     name: "Justino",
-    subtitle: "Una montaña rusa de amor",
+    subtitle: "falta texto",
     year: "2023",
     color: "#FBCFE8",
     get cover() {
@@ -169,7 +169,7 @@ export const CHAPTERS = [
       return coverDe(this.id, this.gallery);
     },
     intro: "Feliz cumpleaños.",
-    body: ["El presente, lo que viene, el deseo para este año nuevo de vida."],
+    body: ["terminar texto"],
     gallery: fotosDe("hoy", [
       "https://images.unsplash.com/photo-1464349153735-7db50ed83c84?q=80&w=800&auto=format&fit=crop",
     ]),

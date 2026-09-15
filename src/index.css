@@ -130,9 +130,15 @@ body,
     transform: scaleX(1.03) scaleY(0.98) rotate(-1deg);
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  [style*="poopJiggle"] {
-    animation: none !important;
+/* El filtro líquido (feTurbulence + feDisplacementMap) del dock y la barra de
+   menú es hermoso pero muy pesado para el compositor de Safari/iOS — ahí solo
+   queda el blur, sin la distorsión, para que todo se sienta fluido. */
+.glass-distortion-fx {
+  filter: url(#glass-distortion);
+}
+@media (max-width: 639px) {
+  .glass-distortion-fx {
+    filter: none !important;
   }
 }
 
@@ -207,6 +213,11 @@ button:not(:disabled),
 .mac-cursor-on,
 .mac-cursor-on * {
   cursor: none !important;
+}
+
+/* scroll con inercia nativa en iOS dentro de las ventanas */
+.mac-scroll {
+  -webkit-overflow-scrolling: touch;
 }
 
 /* thin macOS-like scrollbars inside windows */

@@ -2120,7 +2120,7 @@ export function FileSystem({
           </button>
         </div>
       ) : null}
-      <div className="relative min-h-0 flex-1">
+      <div className="relative min-h-0 flex-1 overflow-hidden">
         {isLoadingCurrentFolder && currentEntries.length === 0 ? (
           <FileSystemEmptyState label="Loading…" isLoading />
         ) : currentEntries.length === 0 &&
@@ -3336,6 +3336,7 @@ function FileSystemIconsView({
 
   return (
     <ScrollArea
+      style={{ position: "absolute", inset: 0 }}
       orientation="vertical"
       viewportRef={viewportRef}
       viewportClassName="p-3"

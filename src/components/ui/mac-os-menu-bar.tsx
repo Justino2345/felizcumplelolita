@@ -103,25 +103,6 @@ const DEFAULT_MENUS: MenuConfig[] = [
   },
 ];
 
-// Apple menu items
-const APPLE_MENU_ITEMS: MenuItemOption[] = [
-  { label: 'About This Mac', action: 'about' },
-  { type: 'separator' },
-  { label: 'System Preferences...', action: 'preferences' },
-  { label: 'App Store...', action: 'app-store' },
-  { type: 'separator' },
-  { label: 'Recent Items', action: 'recent', hasSubmenu: true },
-  { type: 'separator' },
-  { label: 'Force Quit Applications...', action: 'force-quit', shortcut: '⌥⌘⎋' },
-  { type: 'separator' },
-  { label: 'Sleep', action: 'sleep' },
-  { label: 'Restart...', action: 'restart' },
-  { label: 'Shut Down...', action: 'shutdown' },
-  { type: 'separator' },
-  { label: 'Lock Screen', action: 'lock', shortcut: '⌃⌘Q' },
-  { label: 'Log Out...', action: 'logout', shortcut: '⇧⌘Q' },
-];
-
 // MenuDropdown Component (bundled inside)
 interface MenuDropdownProps {
   isOpen: boolean;
@@ -257,7 +238,6 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [dropdownPosition, setDropdownPosition] = useState({ x: 0, y: 0 });
 
-  const appleLogoRef = useRef<HTMLDivElement>(null);
   const menuRefs = useRef<{ [key: string]: HTMLSpanElement | null }>({});
 
   // Update clock every minute
@@ -277,22 +257,6 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
 
     return () => clearInterval(interval);
   }, []);
-
-  const handleAppleMenuClick = useCallback(() => {
-    if (activeMenu === 'apple') {
-      setActiveMenu(null);
-    } else {
-      if (appleLogoRef.current) {
-        const rect = appleLogoRef.current.getBoundingClientRect();
-        const parentRect = appleLogoRef.current.offsetParent?.getBoundingClientRect() || { left: 0, top: 0 };
-        setDropdownPosition({
-          x: rect.left - parentRect.left,
-          y: 34 // Fixed position below the menu bar (32px height + 2px spacing)
-        });
-      }
-      setActiveMenu('apple');
-    }
-  }, [activeMenu]);
 
   const handleMenuItemClick = useCallback((menuLabel: string) => {
     if (activeMenu === menuLabel) {
@@ -333,10 +297,9 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
       >
         {/* Liquid glass layers — mismos que el dock (components/ui/liquid-glass.tsx) */}
         <div
-          className="absolute inset-0 z-0 overflow-hidden rounded-inherit"
+          className="glass-distortion-fx absolute inset-0 z-0 overflow-hidden rounded-inherit"
           style={{
             backdropFilter: 'blur(3px)',
-            filter: 'url(#glass-distortion)',
             isolation: 'isolate',
           }}
         />
@@ -360,12 +323,9 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
         <div className="relative z-30 flex w-full items-center justify-between gap-2 h-full px-2.5 sm:px-4">
           {/* Left section - Apple logo and app menus */}
           <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-4">
-            {/* Apple Logo */}
-            <div
-              ref={appleLogoRef}
-              onClick={handleAppleMenuClick}
-              className="shrink-0 cursor-pointer hover:opacity-80 transition-opacity duration-150"
-            >
+            {/* Apple Logo — decorativo, no tiene menú (no hay nada real que mostrar) */}
+            <div className="shrink-0">
+
               <svg
                 width="15"
                 height="19"
@@ -427,15 +387,6 @@ const MacOSMenuBar: React.FC<MacOSMenuBarProps> = ({
           </div>
         </div>
       </div>
-
-      {/* Apple Menu Dropdown */}
-      <MenuDropdown
-        isOpen={activeMenu === 'apple'}
-        onClose={closeDropdown}
-        items={APPLE_MENU_ITEMS}
-        position={dropdownPosition}
-        onAction={handleMenuAction}
-      />
 
       {/* Menu Dropdowns */}
       {menus.map((menu) => (

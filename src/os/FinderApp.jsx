@@ -1,5 +1,6 @@
 import { FileSystem } from "../components/ui/file-system";
 import { CHAPTERS, GALLERY, FAVORITES, PLAYLIST } from "../data.js";
+import { ICON_SRC } from "./AppIcons.jsx";
 
 // Cada archivo del Finder es en realidad un ACCESO DIRECTO a la sección del
 // sitio de donde viene. El signifier es la flecha "↗" en el nombre; al abrirlo
@@ -28,10 +29,10 @@ const ENTRIES = [
     target: "about",
     item: {
       kind: "file",
-      contentType: "image/svg+xml",
+      contentType: "image/jpeg",
       previewAspectRatio: 1,
-      url: iconTile("🧑", "#9AA6B6", "#5A6472"),
-      previewImageUrl: iconTile("🧑", "#9AA6B6", "#5A6472"),
+      url: ICON_SRC.about ?? iconTile("🧑", "#9AA6B6", "#5A6472"),
+      previewImageUrl: ICON_SRC.about ?? iconTile("🧑", "#9AA6B6", "#5A6472"),
     },
   },
   {
@@ -39,10 +40,10 @@ const ENTRIES = [
     target: "reel",
     item: {
       kind: "file",
-      contentType: "image/svg+xml",
+      contentType: "image/png",
       previewAspectRatio: 1,
-      url: iconTile("🎬", "#4A4A4D", "#161618"),
-      previewImageUrl: iconTile("🎬", "#4A4A4D", "#161618"),
+      url: ICON_SRC.reel ?? iconTile("🎬", "#4A4A4D", "#161618"),
+      previewImageUrl: ICON_SRC.reel ?? iconTile("🎬", "#4A4A4D", "#161618"),
     },
   },
   {
@@ -52,8 +53,8 @@ const ENTRIES = [
       kind: "file",
       contentType: "image/svg+xml",
       previewAspectRatio: 1,
-      url: iconTile("💌", "#5AACFF", "#1E6BE0"),
-      previewImageUrl: iconTile("💌", "#5AACFF", "#1E6BE0"),
+      url: ICON_SRC.contact ?? iconTile("💌", "#5AACFF", "#1E6BE0"),
+      previewImageUrl: ICON_SRC.contact ?? iconTile("💌", "#5AACFF", "#1E6BE0"),
     },
   },
   {
@@ -61,10 +62,10 @@ const ENTRIES = [
     target: "game",
     item: {
       kind: "file",
-      contentType: "image/svg+xml",
+      contentType: "image/jpeg",
       previewAspectRatio: 1,
-      url: iconTile("🐾", "#7ED9A6", "#37B87A"),
-      previewImageUrl: iconTile("🐾", "#7ED9A6", "#37B87A"),
+      url: ICON_SRC.game ?? iconTile("🐾", "#7ED9A6", "#37B87A"),
+      previewImageUrl: ICON_SRC.game ?? iconTile("🐾", "#7ED9A6", "#37B87A"),
     },
   },
 

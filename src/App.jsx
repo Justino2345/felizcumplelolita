@@ -573,7 +573,8 @@ export default function App() {
 }
 
 function renderApp(win, openApp) {
-  if (win.base === "chapter") return <ChapterApp chapterId={win.arg} />;
+  if (win.base === "chapter")
+    return <ChapterApp chapterId={win.arg} openApp={openApp} />;
   switch (win.base) {
     case "about":
       return <AboutApp openChapter={(id) => openApp(`chapter:${id}`)} />;

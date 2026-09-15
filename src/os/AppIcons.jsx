@@ -208,30 +208,48 @@ export const ICON_SRC = {
 
 // Recorta cualquier imagen propia con el mismo squircle que usan los demás
 // iconos, para que el borde quede redondeado sin importar la imagen.
+// En mobile el recorte por SVG <image> ya se ve perfecto (no tocar); en
+// desktop usamos <img> nativo, que el navegador escala con mejor calidad.
 function ImageIcon({ src, fallback }) {
   const [failed, setFailed] = useState(false);
   if (failed || !src) return fallback;
   const id = `img${uid++}`;
   return (
-    <svg viewBox="0 0 64 64" width="100%" height="100%" style={{ display: "block" }}>
-      <defs>
-        <clipPath id={`${id}-clip`}>
-          <path d={SQ} />
-        </clipPath>
-      </defs>
-      <g clipPath={`url(#${id}-clip)`}>
-        <image
-          href={src}
-          x="0"
-          y="0"
-          width="64"
-          height="64"
-          preserveAspectRatio="xMidYMid slice"
-          onError={() => setFailed(true)}
-        />
-      </g>
-      <path d={SQ} fill="none" stroke="#fff" strokeOpacity="0.22" strokeWidth="1" />
-    </svg>
+    <>
+      <svg
+        className="block sm:hidden"
+        viewBox="0 0 64 64"
+        width="100%"
+        height="100%"
+      >
+        <defs>
+          <clipPath id={`${id}-clip`}>
+            <path d={SQ} />
+          </clipPath>
+        </defs>
+        <g clipPath={`url(#${id}-clip)`}>
+          <image
+            href={src}
+            x="0"
+            y="0"
+            width="64"
+            height="64"
+            preserveAspectRatio="xMidYMid slice"
+            onError={() => setFailed(true)}
+          />
+        </g>
+        <path d={SQ} fill="none" stroke="#fff" strokeOpacity="0.22" strokeWidth="1" />
+      </svg>
+      <img
+        src={src}
+        alt=""
+        aria-hidden="true"
+        draggable={false}
+        decoding="async"
+        onError={() => setFailed(true)}
+        className="hidden h-full w-full rounded-[22%] border border-white/25 object-cover sm:block"
+      />
+    </>
   );
 }
 
@@ -267,7 +285,7 @@ export default function AppIcon({ name, appId, className = "" }) {
   const glyph = GLYPHS[name] ?? GLYPHS.folder;
   const src = appId ? ICON_SRC[appId] : null;
   return (
-    <span className={`block ${className}`} style={{ lineHeight: 0 }}>
+    <span className={`block h-full w-full ${className}`} style={{ lineHeight: 0 }}>
       <ImageIcon src={src} fallback={glyph} />
     </span>
   );
