@@ -316,8 +316,8 @@ export function GalleryApp() {
 export function ReelApp() {
   return (
     <div className="px-8 py-7 text-[#6b6375]">
-      <h1 className="text-2xl font-semibold text-[#08060d]">Los videos</h1>
-      <p className="mt-2">Un recopilado de los mejores momentos.</p>
+      <h1 className="text-2xl font-semibold text-[#08060d]">Mi noche soñada</h1>
+      <p className="mt-2">Recuerdos inolvidables de una noche inolvidable.</p>
       {REEL_VIDEOS.map((v) => {
         const embedUrl = youtubeEmbedUrl(v.youtubeUrl);
         return (
