@@ -12,8 +12,12 @@ import {
 } from "../data.js";
 import { LightboxImg } from "./Lightbox.jsx";
 
-// Video de los 15 en YouTube.
-const REEL_YOUTUBE_URL = "https://www.youtube.com/watch?v=jRPGP3eLIA4";
+// Videos de los 15 en YouTube (son 2 separados: el despertar y la fiesta).
+// Poné el link de YouTube de "El despertar" acá cuando lo tengas.
+const REEL_VIDEOS = [
+  { title: "El despertar", youtubeUrl: "" },
+  { title: "La fiesta", youtubeUrl: "https://www.youtube.com/watch?v=jRPGP3eLIA4" },
+];
 
 // "Descarga tu cartita" (capítulo Justino): pedí la contraseña y, si es
 // correcta, descarga este PDF. Poné acá la ruta cuando subas el archivo
@@ -310,24 +314,31 @@ export function GalleryApp() {
 }
 
 export function ReelApp() {
-  const embedUrl = youtubeEmbedUrl(REEL_YOUTUBE_URL);
   return (
     <div className="px-8 py-7 text-[#6b6375]">
-      <h1 className="text-2xl font-semibold text-[#08060d]">El video</h1>
+      <h1 className="text-2xl font-semibold text-[#08060d]">Los videos</h1>
       <p className="mt-2">Un recopilado de los mejores momentos.</p>
-      <div className="mt-6 aspect-video w-full overflow-hidden rounded-2xl bg-black">
-        {embedUrl ? (
-          <iframe
-            className="h-full w-full"
-            src={embedUrl}
-            title="El video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          />
-        ) : (
-          <video className="h-full w-full object-cover" controls poster={GALLERY[0]?.thumb} />
-        )}
-      </div>
+      {REEL_VIDEOS.map((v) => {
+        const embedUrl = youtubeEmbedUrl(v.youtubeUrl);
+        return (
+          <div key={v.title} className="mt-6">
+            <h2 className="text-lg font-semibold text-[#08060d]">{v.title}</h2>
+            <div className="mt-2 aspect-video w-full overflow-hidden rounded-2xl bg-black">
+              {embedUrl ? (
+                <iframe
+                  className="h-full w-full"
+                  src={embedUrl}
+                  title={v.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              ) : (
+                <video className="h-full w-full object-cover" controls poster={GALLERY[0]?.thumb} />
+              )}
+            </div>
+          </div>
+        );
+      })}
       {XV_GALLERY.length > 0 && (
         <div className="mt-6 columns-2 gap-4 sm:columns-3 [&_img]:mb-4">
           {XV_GALLERY.map((g, i) => (

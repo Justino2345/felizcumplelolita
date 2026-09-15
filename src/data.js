@@ -138,8 +138,8 @@ export const CHAPTERS = [
     get cover() {
       return coverDe(this.id, this.gallery);
     },
-    intro: "La historia de amor.",
-    body: ["Cómo se conocieron, la primera cita, la propuesta, el casamiento."],
+    intro: "falta texto",
+    body: ["falta texto."],
     gallery: fotosDe("amor", [
       "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop",
     ]),
