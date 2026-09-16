@@ -14,11 +14,20 @@ import {
   ReelApp,
   ResourcesApp,
 } from "./os/apps.jsx";
+import CountdownGate from "./os/CountdownGate.jsx";
 import GameApp from "./os/GameApp.jsx";
 import FinderApp from "./os/FinderApp.jsx";
 import { GlassFilter, GlassDock } from "./components/ui/liquid-glass";
 import { WarpBackground } from "./components/ui/wrap-shader";
 import MacOSMenuBar from "./components/ui/mac-os-menu-bar";
+
+// Pantalla de "estreno" a pantalla completa que tapa todo el sitio hasta
+// esta fecha/hora (local del dispositivo de quien entra). Para probar sin
+// esperar, cambiá la fecha; para sacarla del medio (ej. mientras se sigue
+// trabajando en el sitio antes del cumple), poné COUNTDOWN_GATE_ENABLED en
+// false — así queda desactivada sin borrar el código.
+const COUNTDOWN_GATE_ENABLED = false;
+const BIRTHDAY_AT = new Date(2026, 8, 18, 0, 0, 0);
 
 // Fondo de escritorio — Aurora Dream, dominante #ffb7e3
 const WALLPAPER = `
@@ -209,6 +218,9 @@ export default function App() {
   const view = useViewport();
   const { isMobile } = view;
   const dragRef = useRef({ id: null, moved: false });
+  const [gateOpen, setGateOpen] = useState(
+    () => COUNTDOWN_GATE_ENABLED && new Date() < BIRTHDAY_AT
+  );
 
   const focus = useCallback((key) => {
     setZTop((z) => {
@@ -326,6 +338,10 @@ export default function App() {
     }
     openApp(id);
   };
+
+  if (gateOpen) {
+    return <CountdownGate target={BIRTHDAY_AT} onReached={() => setGateOpen(false)} />;
+  }
 
   return (
     <div

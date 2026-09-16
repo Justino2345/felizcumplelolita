@@ -285,6 +285,8 @@ export function ChapterApp({ chapterId, openApp }) {
               src={g.src}
               thumbSrc={g.thumb}
               alt=""
+              images={c.gallery}
+              index={i}
               className="w-full rounded-xl object-cover"
             />
           ))}
@@ -305,6 +307,8 @@ export function GalleryApp() {
             src={g.src}
             thumbSrc={g.thumb}
             alt=""
+            images={GALLERY}
+            index={i}
             className="w-full rounded-xl object-cover"
           />
         ))}
@@ -347,6 +351,8 @@ export function ReelApp() {
               src={g.src}
               thumbSrc={g.thumb}
               alt=""
+              images={XV_GALLERY}
+              index={i}
               className="w-full rounded-xl object-cover"
             />
           ))}
