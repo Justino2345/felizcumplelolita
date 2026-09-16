@@ -64,6 +64,7 @@ const DESKTOP_ICONS = [
   { id: "reel", label: "Mis XV ", emoji: "🎬", x: 40, y: 310 },
   { id: "music", label: "Playlist", emoji: "🎵", x: 150, y: 200 },
   { id: "game", label: "Mis pupis", emoji: "🐾", x: 40, y: 420 },
+  { id: "contact", label: "Saludos", emoji: "💌", x: 150, y: 90 },
   { id: "resources", label: "Todo", emoji: "🗂️", x: "RIGHT", y: 90 },
   ...CHAPTERS.map((c, i) => ({
     id: `chapter:${c.id}`,
