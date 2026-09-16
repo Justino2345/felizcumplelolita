@@ -26,8 +26,8 @@ import MacOSMenuBar from "./components/ui/mac-os-menu-bar";
 // esperar, cambiá la fecha; para sacarla del medio (ej. mientras se sigue
 // trabajando en el sitio antes del cumple), poné COUNTDOWN_GATE_ENABLED en
 // false — así queda desactivada sin borrar el código.
-const COUNTDOWN_GATE_ENABLED = true;
-const BIRTHDAY_AT = new Date(2026, 8, 17, 18, 1, 0);
+const COUNTDOWN_GATE_ENABLED = false;
+const BIRTHDAY_AT = new Date(2026, 8, 18, 0, 0, 0);
 
 // Fondo de escritorio — Aurora Dream, dominante #ffb7e3
 const WALLPAPER = `
