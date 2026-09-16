@@ -15,7 +15,7 @@ import { LightboxImg } from "./Lightbox.jsx";
 // Videos de los 15 en YouTube (son 2 separados: el despertar y la fiesta).
 // Poné el link de YouTube de "El despertar" acá cuando lo tengas.
 const REEL_VIDEOS = [
-  { title: "El despertar", youtubeUrl: "" },
+  { title: "El despertar", youtubeUrl: "https://www.youtube.com/watch?v=n9qbd0yZNw0" },
   { title: "La fiesta", youtubeUrl: "https://www.youtube.com/watch?v=jRPGP3eLIA4" },
 ];
 

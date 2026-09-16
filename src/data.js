@@ -132,14 +132,14 @@ export const CHAPTERS = [
   {
     id: "amor",
     name: "Justino",
-    subtitle: "falta texto",
+    subtitle: "2 locos a su locura",
     year: "2023",
     color: "#FBCFE8",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
-    intro: "falta texto",
-    body: ["falta texto."],
+    intro: "Más de 3 años juntitos",
+    body: ["Hay cosas que no cambian y una es el amor que nos tenemos. Pueden haber discusiones, encuentros y lo que sea pero seguimos juntos al pie del cañon siempre. Lo que sobran son recuerdos, y cuántos quedan por vivir. Feliz cumpleaños lolita, que seas feliz hoy y siempre, te amo mucho."],
     gallery: fotosDe("amor", [
       "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop",
     ]),
@@ -168,8 +168,8 @@ export const CHAPTERS = [
     get cover() {
       return coverDe(this.id, this.gallery);
     },
-    intro: "Feliz cumpleaños.",
-    body: ["terminar texto"],
+    intro: "Feliz cumpleaños lolita, que seas feliz siempre",
+    body: ["Personas que te quieren mucho te mandaron saluditos y mensajes de cariño, y acá los vas a poder leer todos."],
     gallery: fotosDe("hoy", [
       "https://images.unsplash.com/photo-1464349153735-7db50ed83c84?q=80&w=800&auto=format&fit=crop",
     ]),
