@@ -24,8 +24,8 @@ const REEL_VIDEOS = [
 // "Descarga tu cartita" (capítulo Justino): pedí la contraseña y, si es
 // correcta, descarga este PDF. Poné acá la ruta cuando subas el archivo
 // (ej: "/cartita.pdf" con el PDF en public/cartita.pdf).
-const CARTITA_PDF_URL = "";
-const CARTITA_PASSWORD = "chesushi";
+const CARTITA_PDF_URL = "/Cartita%20lola.pdf";
+const CARTITA_PASSWORD = "roses";
 
 function youtubeEmbedUrl(url) {
   const id = url?.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)?.[1];
@@ -205,7 +205,7 @@ function CartitaLink({ className = "ml-2 align-middle text-sm font-medium text-b
                 <form onSubmit={submit}>
                   <h2 className="text-lg font-bold text-[#08060d]">Tu cartita</h2>
                   <p className="mt-2 text-sm text-[#6b6375]">
-                    Contraseña= lugar que siempre pedimos sushi
+                    Contraseña= último lugar del que pediste comida
                   </p>
                   <input
                     type="password"
