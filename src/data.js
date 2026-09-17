@@ -175,8 +175,11 @@ export const CHAPTERS = [
     get cover() {
       return coverDe(this.id, this.gallery);
     },
-    intro: "Los hijos, la casa, la rutina feliz.",
-    body: ["El nacimiento de los hijos, las primeras palabras, las vacaciones."],
+    intro: "Su lugar feliz.",
+    body: [
+      "La familia, para Lolita es su lugar feliz.",
+      "Es la mesa de la abuela, los viajes compartidos, los encuentros, las charlas, las risas y esos momentos que se convierten en recuerdos para siempre. Lola disfruta profundamente estar con los suyos; papás, abuelos, tíos, hermanos, primos! porque para ella, compartir en familia es una de las formas más lindas de celebrar la vida.",
+    ],
     gallery: mediaDe("familia", [
       "https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800&auto=format&fit=crop",
     ]),
