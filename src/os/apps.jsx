@@ -261,20 +261,6 @@ export function ChapterApp({ chapterId, openApp }) {
           <div className={`text-sm font-medium ${subtleOnImage}`}>{c.year}</div>
           <h1 className={`inline text-3xl font-semibold ${textOnImage}`}>{c.name}</h1>
           {c.id === "amor" && <CartitaLink />}
-          {c.id === "hoy" && (
-            <button
-              type="button"
-              data-cursor="pointer"
-              onClick={() => openApp?.("contact")}
-              className={`ml-2 align-middle text-sm font-medium underline underline-offset-4 transition ${
-                c.headerImage
-                  ? "text-white/85 decoration-white/40 hover:text-white"
-                  : "text-black/50 decoration-black/25 hover:text-black/70"
-              }`}
-            >
-              Ver los saludos ↗
-            </button>
-          )}
           <p className={subtleOnImage}>{c.subtitle}</p>
         </div>
       </div>
@@ -283,6 +269,16 @@ export function ChapterApp({ chapterId, openApp }) {
         {c.body.map((p, i) => (
           <p key={i} className="mt-4 leading-relaxed">{p}</p>
         ))}
+        {c.id === "hoy" && (
+          <button
+            type="button"
+            data-cursor="pointer"
+            onClick={() => openApp?.("contact")}
+            className="mt-4 text-sm font-medium text-[#6b6375] underline decoration-black/25 underline-offset-4 transition hover:text-[#08060d]"
+          >
+            Ver los saludos ↗
+          </button>
+        )}
         {c.videos?.map((v, i) => (
           <video
             key={i}
