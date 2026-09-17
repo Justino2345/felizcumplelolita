@@ -37,9 +37,18 @@ function fotosDe(id, fallbackUrls) {
   return fallbackUrls.map((url) => ({ src: url, thumb: url }));
 }
 
-// Videos reales subidos a public/fotos/<carpeta> (ej: public/fotos/facultad/*.mp4).
-function videosDe(id) {
-  return fotosManifest[id]?.videos ?? [];
+// Fotos + videos de public/fotos/<carpeta>, mezclados entre sí al azar (los
+// videos no van primero ni aparte: se comportan como una foto más). Si la
+// carpeta está vacía, se usa el placeholder de Unsplash del capítulo.
+function mediaDe(id, fallbackUrls) {
+  const fotos = fotosManifest[id]?.images ?? [];
+  const videos = fotosManifest[id]?.videos ?? [];
+  const items = [
+    ...fotos.map((f) => ({ ...f, type: "image" })),
+    ...videos.map((v) => ({ src: v, type: "video" })),
+  ];
+  if (items.length > 0) return shuffle(items);
+  return fallbackUrls.map((url) => ({ src: url, thumb: url, type: "image" }));
 }
 
 export const PERSON = {
@@ -98,7 +107,7 @@ export const CHAPTERS = [
       "Te amamos con todo nuestro corazón.",
       "Mamá y Papá",
     ],
-    gallery: fotosDe("infancia", [
+    gallery: mediaDe("infancia", [
       "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?q=80&w=800&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?q=80&w=800&auto=format&fit=crop",
     ]),
@@ -118,7 +127,7 @@ export const CHAPTERS = [
       "falta texto",
       "falta texto",
     ],
-    gallery: fotosDe("adolescencia", [
+    gallery: mediaDe("adolescencia", [
       "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop",
     ]),
   },
@@ -136,10 +145,9 @@ export const CHAPTERS = [
     body: [
       "Y si, este momento iba a llegar. Con intriga y una mezcla de emoción y miedo, llegó. Hoy mi día se basa en estudiar, gimnasio, estudiar, comer, dormir, y así en bucle. No me quejo para nada, al contrario, lo estoy disfrutando, conocí gente nueva y me estoy llenando de aprendizajes y valores. Cuando mire para atrás, siendo *me pongo de pie* Ing. Rovatti, la sonrisa nostálgica sabiendo que valió la pena no va a faltar.",
     ],
-    gallery: fotosDe("facultad", [
+    gallery: mediaDe("facultad", [
       "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop",
     ]),
-    videos: videosDe("facultad"),
   },
   {
     id: "amor",
@@ -152,7 +160,7 @@ export const CHAPTERS = [
     },
     intro: "Más de 3 años juntitos",
     body: ["Hay cosas que no cambian y una es el amor que nos tenemos. Pueden haber discusiones, encuentros y lo que sea pero seguimos juntos al pie del cañon siempre. Lo que sobran son recuerdos, y cuántos quedan por vivir. Feliz cumpleaños lolita, que seas feliz hoy y siempre, te amo mucho."],
-    gallery: fotosDe("amor", [
+    gallery: mediaDe("amor", [
       "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop",
     ]),
   },
@@ -169,7 +177,7 @@ export const CHAPTERS = [
     },
     intro: "Los hijos, la casa, la rutina feliz.",
     body: ["El nacimiento de los hijos, las primeras palabras, las vacaciones."],
-    gallery: fotosDe("familia", [
+    gallery: mediaDe("familia", [
       "https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=800&auto=format&fit=crop",
     ]),
   },
@@ -185,7 +193,7 @@ export const CHAPTERS = [
     },
     intro: "Feliz cumpleaños lolita, que seas feliz siempre",
     body: ["Personas que te quieren mucho te mandaron saluditos y mensajes de cariño, y acá los vas a poder leer todos."],
-    gallery: fotosDe("hoy", [
+    gallery: mediaDe("hoy", [
       "https://images.unsplash.com/photo-1464349153735-7db50ed83c84?q=80&w=800&auto=format&fit=crop",
     ]),
   },

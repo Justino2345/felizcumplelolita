@@ -281,26 +281,35 @@ export function ChapterApp({ chapterId, openApp }) {
         {c.id === "amor" && (
           <CartitaLink className="mt-4 inline-block text-sm font-medium text-[#6b6375] underline decoration-black/25 underline-offset-4 transition hover:text-[#08060d]" />
         )}
-        {c.videos?.map((v, i) => (
-          <video
-            key={i}
-            className="mt-6 aspect-video w-full rounded-xl bg-black object-cover"
-            controls
-            src={v}
-          />
-        ))}
         <div className="mt-6 columns-2 gap-4 sm:columns-3 [&_img]:mb-4">
-          {c.gallery.map((g, i) => (
-            <LightboxImg
-              key={i}
-              src={g.src}
-              thumbSrc={g.thumb}
-              alt=""
-              images={c.gallery}
-              index={i}
-              className="w-full rounded-xl object-cover"
-            />
-          ))}
+          {(() => {
+            const images = c.gallery.filter((g) => g.type !== "video");
+            let imgIndex = 0;
+            return c.gallery.map((g, i) => {
+              if (g.type === "video") {
+                return (
+                  <video
+                    key={i}
+                    className="mb-4 w-full rounded-xl bg-black object-cover"
+                    controls
+                    src={g.src}
+                  />
+                );
+              }
+              const index = imgIndex++;
+              return (
+                <LightboxImg
+                  key={i}
+                  src={g.src}
+                  thumbSrc={g.thumb}
+                  alt=""
+                  images={images}
+                  index={index}
+                  className="w-full rounded-xl object-cover"
+                />
+              );
+            });
+          })()}
         </div>
       </div>
     </div>
