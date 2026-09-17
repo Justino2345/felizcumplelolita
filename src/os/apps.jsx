@@ -249,14 +249,28 @@ export function ChapterApp({ chapterId, openApp }) {
     <div className="text-[#6b6375]">
       <div
         className="relative flex h-52 items-end overflow-hidden p-8"
-        style={{
-          background: c.headerImage
-            ? `linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05)), url("${c.headerImage}")`
-            : c.color,
-          backgroundSize: "cover",
-          backgroundPosition: c.headerImagePosition ?? "center 20%",
-        }}
+        style={{ background: c.headerImage ? undefined : c.color }}
       >
+        {c.headerImage && (
+          <>
+            <div
+              className="absolute inset-0 lg:hidden"
+              style={{
+                background: `linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05)), url("${c.headerImage}")`,
+                backgroundSize: "cover",
+                backgroundPosition: c.headerImagePosition ?? "center 20%",
+              }}
+            />
+            <div
+              className="absolute inset-0 hidden lg:block"
+              style={{
+                background: `linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05)), url("${c.headerImageDesktop || c.headerImage}")`,
+                backgroundSize: "cover",
+                backgroundPosition: c.headerImagePositionDesktop ?? c.headerImagePosition ?? "center 20%",
+              }}
+            />
+          </>
+        )}
         <div className="relative">
           <div className={`text-sm font-medium ${subtleOnImage}`}>{c.year}</div>
           <h1 className={`inline text-3xl font-semibold ${textOnImage}`}>{c.name}</h1>

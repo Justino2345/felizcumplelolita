@@ -82,6 +82,13 @@ export const FACETS = [
 ];
 
 // "Projects" en la original -> capítulos cronológicos de la vida
+//
+// headerImage / headerImageDesktop: portada del header de cada capítulo.
+// headerImage se usa en mobile/tablet y headerImageDesktop en pantallas
+// grandes (desktop). Si un capítulo no tiene headerImageDesktop propia,
+// se usa headerImage también en desktop. Para agregar la versión de
+// escritorio de un capítulo, subí el archivo a public/ y sumá el campo
+// headerImageDesktop: "/nombre del archivo.jpg" junto a su headerImage.
 export const CHAPTERS = [
   {
     id: "infancia",
@@ -155,6 +162,7 @@ export const CHAPTERS = [
     subtitle: "2 locos a su locura",
     year: "2023",
     color: "#FBCFE8",
+    headerImage: "/portada amor.JPG",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
