@@ -132,7 +132,7 @@ export function AboutApp({ openChapter }) {
 
 // Link "Descarga tu cartita ↗" (solo en el capítulo de Justino/amor): abre un
 // cuadro con un campo de contraseña; si coincide, descarga el PDF.
-function CartitaLink() {
+function CartitaLink({ className = "ml-2 align-middle text-sm font-medium text-black/50 underline decoration-black/25 underline-offset-4 transition hover:text-black/70" }) {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
   const [wrong, setWrong] = useState(false);
@@ -169,7 +169,7 @@ function CartitaLink() {
         type="button"
         data-cursor="pointer"
         onClick={() => setOpen(true)}
-        className="ml-2 align-middle text-sm font-medium text-black/50 underline decoration-black/25 underline-offset-4 transition hover:text-black/70"
+        className={className}
       >
         Descarga tu cartita ↗
       </button>
@@ -260,7 +260,6 @@ export function ChapterApp({ chapterId, openApp }) {
         <div className="relative">
           <div className={`text-sm font-medium ${subtleOnImage}`}>{c.year}</div>
           <h1 className={`inline text-3xl font-semibold ${textOnImage}`}>{c.name}</h1>
-          {c.id === "amor" && <CartitaLink />}
           <p className={subtleOnImage}>{c.subtitle}</p>
         </div>
       </div>
@@ -278,6 +277,9 @@ export function ChapterApp({ chapterId, openApp }) {
           >
             Ver los saludos ↗
           </button>
+        )}
+        {c.id === "amor" && (
+          <CartitaLink className="mt-4 inline-block text-sm font-medium text-[#6b6375] underline decoration-black/25 underline-offset-4 transition hover:text-[#08060d]" />
         )}
         {c.videos?.map((v, i) => (
           <video
