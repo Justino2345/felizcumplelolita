@@ -201,7 +201,7 @@ export const ICON_SRC = {
   "chapter:infancia": "/icons/chapter-infancia.jpeg",
   "chapter:adolescencia": "/icons/chapter-adolescencia.jpg",
   "chapter:facultad": "/icons/chapter-facultad.jpg",
-  "chapter:amor": "/icons/chapter-amor.png",
+  "chapter:amor": "/icons/portada%20amor.JPG",
   "chapter:familia": "/icons/chapter-familia.jpeg",
   "chapter:hoy": "/icons/hoy.jpg",
 };
