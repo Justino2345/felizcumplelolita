@@ -9,6 +9,7 @@ import {
   PLAYLIST,
   GREETINGS_SHEET_CSV_URL,
   XV_GALLERY,
+  XV_HEADER_IMAGE,
 } from "../data.js";
 import { LightboxImg } from "./Lightbox.jsx";
 
@@ -242,27 +243,39 @@ function CartitaLink() {
 
 export function ChapterApp({ chapterId, openApp }) {
   const c = CHAPTERS.find((x) => x.id === chapterId) ?? CHAPTERS[0];
+  const textOnImage = c.headerImage ? "text-white" : "text-black/80";
+  const subtleOnImage = c.headerImage ? "text-white/80" : "text-black/60";
   return (
     <div className="text-[#6b6375]">
       <div
-        className="flex h-52 items-end p-8"
-        style={{ background: c.color }}
+        className="relative flex h-52 items-end overflow-hidden p-8"
+        style={{
+          background: c.headerImage
+            ? `linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05)), url("${c.headerImage}")`
+            : c.color,
+          backgroundSize: "cover",
+          backgroundPosition: c.headerImagePosition ?? "center 20%",
+        }}
       >
-        <div>
-          <div className="text-sm font-medium text-black/60">{c.year}</div>
-          <h1 className="inline text-3xl font-semibold text-black/80">{c.name}</h1>
+        <div className="relative">
+          <div className={`text-sm font-medium ${subtleOnImage}`}>{c.year}</div>
+          <h1 className={`inline text-3xl font-semibold ${textOnImage}`}>{c.name}</h1>
           {c.id === "amor" && <CartitaLink />}
           {c.id === "hoy" && (
             <button
               type="button"
               data-cursor="pointer"
               onClick={() => openApp?.("contact")}
-              className="ml-2 align-middle text-sm font-medium text-black/50 underline decoration-black/25 underline-offset-4 transition hover:text-black/70"
+              className={`ml-2 align-middle text-sm font-medium underline underline-offset-4 transition ${
+                c.headerImage
+                  ? "text-white/85 decoration-white/40 hover:text-white"
+                  : "text-black/50 decoration-black/25 hover:text-black/70"
+              }`}
             >
               Ver los saludos ↗
             </button>
           )}
-          <p className="text-black/60">{c.subtitle}</p>
+          <p className={subtleOnImage}>{c.subtitle}</p>
         </div>
       </div>
       <div className="px-8 py-7">
@@ -319,8 +332,21 @@ export function GalleryApp() {
 
 export function ReelApp() {
   return (
-    <div className="px-8 py-7 text-[#6b6375]">
-      <h1 className="text-2xl font-semibold text-[#08060d]">Mi noche soñada</h1>
+    <div className="text-[#6b6375]">
+      <div
+        className="flex h-52 items-end p-8"
+        style={{
+          background: `linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05)), url("${XV_HEADER_IMAGE}")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center 20%",
+        }}
+      >
+        <div>
+          <h1 className="text-3xl font-semibold text-white">Mis XV</h1>
+          <p className="text-white/80">Mi noche soñada</p>
+        </div>
+      </div>
+      <div className="px-8 py-7">
       <p className="mt-2">Recuerdos inolvidables de una noche inolvidable.</p>
       {REEL_VIDEOS.map((v) => {
         const embedUrl = youtubeEmbedUrl(v.youtubeUrl);
@@ -358,6 +384,7 @@ export function ReelApp() {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 }

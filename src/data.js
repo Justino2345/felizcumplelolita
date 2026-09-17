@@ -80,6 +80,7 @@ export const CHAPTERS = [
     subtitle: "Los primeros años",
     year: "2007",
     color: "#F0562E",
+    headerImage: "/portada infancia.jpeg",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
@@ -108,6 +109,7 @@ export const CHAPTERS = [
     subtitle: "La escuela y los amigos",
     year: "2021",
     color: "#E7E2D9",
+    headerImage: "/portada adol.jpeg",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
@@ -159,6 +161,8 @@ export const CHAPTERS = [
     subtitle: "Mi sostén y cable a tierra",
     year: "2007-∞",
     color: "#BBF7D0",
+    headerImage: "/portada familia.jpeg",
+    headerImagePosition: "center 85%",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
@@ -174,6 +178,7 @@ export const CHAPTERS = [
     subtitle: "Mi pumple",
     year: "2026",
     color: "#BAE6FD",
+    headerImage: "/portada hoy.png",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
@@ -238,6 +243,7 @@ export const GALLERY =
 
 // Fotos de los 15 (app "Mis XV"). Subilas a public/fotos/xv y aparecen solas.
 export const XV_GALLERY = fotosDe("xv", []);
+export const XV_HEADER_IMAGE = "/portada xv.jpg";
 
 // Poné el link de Spotify de cada tema en `spotify` (botón "Compartir → Copiar
 // enlace" en la app de Spotify). Si lo dejás vacío, la fila no es un link.
