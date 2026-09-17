@@ -10,6 +10,7 @@ import {
   GREETINGS_SHEET_CSV_URL,
   XV_GALLERY,
   XV_HEADER_IMAGE,
+  XV_HEADER_IMAGE_DESKTOP,
 } from "../data.js";
 import { LightboxImg } from "./Lightbox.jsx";
 
@@ -354,15 +355,24 @@ export function GalleryApp() {
 export function ReelApp() {
   return (
     <div className="text-[#6b6375]">
-      <div
-        className="flex h-52 items-end p-8"
-        style={{
-          background: `linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05)), url("${XV_HEADER_IMAGE}")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center 20%",
-        }}
-      >
-        <div>
+      <div className="relative flex h-52 items-end overflow-hidden p-8">
+        <div
+          className="absolute inset-0 lg:hidden"
+          style={{
+            background: `linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05)), url("${XV_HEADER_IMAGE}")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center 20%",
+          }}
+        />
+        <div
+          className="absolute inset-0 hidden lg:block"
+          style={{
+            background: `linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.05)), url("${XV_HEADER_IMAGE_DESKTOP || XV_HEADER_IMAGE}")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center 20%",
+          }}
+        />
+        <div className="relative">
           <h1 className="text-3xl font-semibold text-white">Mis XV</h1>
           <p className="text-white/80">Mi noche soñada</p>
         </div>

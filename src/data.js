@@ -126,6 +126,7 @@ export const CHAPTERS = [
     year: "2021",
     color: "#E7E2D9",
     headerImage: "/portada adol.jpeg",
+    headerImageDesktop: "/Portadas desktop/adol.jpeg",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
@@ -145,6 +146,7 @@ export const CHAPTERS = [
     year: "2026",
     color: "#FDE68A",
     headerImage: "/portada facu.jpg",
+    headerImageDesktop: "/Portadas desktop/facultad.jpg",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
@@ -163,6 +165,7 @@ export const CHAPTERS = [
     year: "2023",
     color: "#FBCFE8",
     headerImage: "/portada amor.JPG",
+    headerImageDesktop: "/Portadas desktop/amor.JPG",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
@@ -180,6 +183,7 @@ export const CHAPTERS = [
     color: "#BBF7D0",
     headerImage: "/portada familia.jpeg",
     headerImagePosition: "center 85%",
+    headerImageDesktop: "/Portadas desktop/familia.jpeg",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
@@ -199,6 +203,7 @@ export const CHAPTERS = [
     year: "2026",
     color: "#BAE6FD",
     headerImage: "/portada hoy.png",
+    headerImageDesktop: "/Portadas desktop/hoy.png",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
@@ -264,6 +269,7 @@ export const GALLERY =
 // Fotos de los 15 (app "Mis XV"). Subilas a public/fotos/xv y aparecen solas.
 export const XV_GALLERY = fotosDe("xv", []);
 export const XV_HEADER_IMAGE = "/portada xv.jpg";
+export const XV_HEADER_IMAGE_DESKTOP = "/Portadas desktop/xv.jpg";
 
 // Poné el link de Spotify de cada tema en `spotify` (botón "Compartir → Copiar
 // enlace" en la app de Spotify). Si lo dejás vacío, la fila no es un link.
