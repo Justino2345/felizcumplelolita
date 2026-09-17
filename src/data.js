@@ -130,10 +130,10 @@ export const CHAPTERS = [
     get cover() {
       return coverDe(this.id, this.gallery);
     },
-    intro: "falta texto",
+    intro: "La escuela y las amigas de siempre.",
     body: [
-      "falta texto",
-      "falta texto",
+      "Y llegó esa etapa donde todo se vive más fuerte: las primeras salidas, los recreos eternos, las risas en el grupo del cole que todavía siguen ahí.",
+      "Entre parciales, viajes de egresados y fotos de fiesta, fui armando mi lugar con las amigas que se convirtieron en familia. Cada joda, cada previa, cada tarde de nada haciendo todo, quedó grabada para siempre.",
     ],
     gallery: mediaDe("adolescencia", [
       "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop",
