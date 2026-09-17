@@ -128,6 +128,7 @@ export const CHAPTERS = [
     subtitle: "Lo que hoy me toca.",
     year: "2026",
     color: "#FDE68A",
+    headerImage: "/portada facu.jpg",
     get cover() {
       return coverDe(this.id, this.gallery);
     },
