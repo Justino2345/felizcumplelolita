@@ -296,7 +296,7 @@ export function ChapterApp({ chapterId, openApp }) {
         {c.id === "amor" && (
           <CartitaLink className="mt-4 inline-block text-sm font-medium text-[#6b6375] underline decoration-black/25 underline-offset-4 transition hover:text-[#08060d]" />
         )}
-        <div className="mt-6 columns-2 gap-4 sm:columns-3 [&_img]:mb-4">
+        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
           {(() => {
             const images = c.gallery.filter((g) => g.type !== "video");
             let imgIndex = 0;
@@ -305,7 +305,7 @@ export function ChapterApp({ chapterId, openApp }) {
                 return (
                   <video
                     key={i}
-                    className="mb-4 w-full rounded-xl bg-black object-cover"
+                    className="aspect-square w-full rounded-xl bg-black object-cover"
                     controls
                     src={g.src}
                   />
@@ -320,7 +320,7 @@ export function ChapterApp({ chapterId, openApp }) {
                   alt=""
                   images={images}
                   index={index}
-                  className="w-full rounded-xl object-cover"
+                  className="aspect-square w-full rounded-xl object-cover"
                 />
               );
             });
@@ -335,7 +335,7 @@ export function GalleryApp() {
   return (
     <div className="px-8 py-7">
       <h1 className="text-2xl font-semibold text-[#08060d]">Galería</h1>
-      <div className="mt-6 columns-2 gap-4 sm:columns-3 [&_img]:mb-4">
+      <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
         {GALLERY.map((g, i) => (
           <LightboxImg
             key={i}
@@ -344,7 +344,7 @@ export function GalleryApp() {
             alt=""
             images={GALLERY}
             index={i}
-            className="w-full rounded-xl object-cover"
+            className="aspect-square w-full rounded-xl object-cover"
           />
         ))}
       </div>
@@ -401,7 +401,7 @@ export function ReelApp() {
         );
       })}
       {XV_GALLERY.length > 0 && (
-        <div className="mt-6 columns-2 gap-4 sm:columns-3 [&_img]:mb-4">
+        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
           {XV_GALLERY.map((g, i) => (
             <LightboxImg
               key={i}
@@ -410,7 +410,7 @@ export function ReelApp() {
               alt=""
               images={XV_GALLERY}
               index={i}
-              className="w-full rounded-xl object-cover"
+              className="aspect-square w-full rounded-xl object-cover"
             />
           ))}
         </div>
