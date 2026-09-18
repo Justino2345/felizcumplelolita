@@ -25,7 +25,7 @@ const REEL_VIDEOS = [
 // correcta, descarga este PDF. Poné acá la ruta cuando subas el archivo
 // (ej: "/cartita.pdf" con el PDF en public/cartita.pdf).
 const CARTITA_PDF_URL = "/Cartita%20lola.pdf";
-const CARTITA_PASSWORD = "roses";
+const CARTITA_PASSWORD = "mcdonalds";
 
 function youtubeEmbedUrl(url) {
   const id = url?.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)?.[1];
