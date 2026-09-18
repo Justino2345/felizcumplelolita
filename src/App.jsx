@@ -378,8 +378,7 @@ export default function App() {
             transition={{ duration: 0.35, delay: 0.15 + i * 0.035, ease: "easeOut" }}
             data-cursor="grab"
             onPointerDown={(e) => startIconDrag(e, ic.id)}
-            onClick={() => isMobile && activateIcon(ic.id)}
-            onDoubleClick={() => !isMobile && activateIcon(ic.id)}
+            onClick={() => activateIcon(ic.id)}
             className="absolute z-[10] flex w-[76px] touch-none select-none flex-col items-center gap-1 rounded-lg p-2 text-center text-[11px] font-normal tracking-[-0.005em] text-white/95 [text-shadow:0_1px_3px_rgba(0,0,0,0.28)] hover:bg-white/10 active:bg-white/15 sm:w-20"
             style={{ left: p ? p.x : ic.dx, top: p ? p.y : ic.dy }}
           >
