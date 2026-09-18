@@ -309,6 +309,7 @@ export default function App() {
     if (e.button === 2) return;
     const startX = e.clientX;
     const startY = e.clientY;
+    const startT = performance.now();
     const rect = e.currentTarget.getBoundingClientRect();
     const originX = rect.left;
     const originY = rect.top;
@@ -317,7 +318,13 @@ export default function App() {
     const move = (ev) => {
       const dx = ev.clientX - startX;
       const dy = ev.clientY - startY;
-      if (!dragRef.current.moved && Math.hypot(dx, dy) < 5) return;
+      // Umbral más alto y con un mínimo de tiempo: en trackpads de Mac el
+      // click en sí produce un pequeño jitter de posición que con un
+      // umbral chico (5px) se confundía con un arrastre, y el click no
+      // llegaba a abrir la app (quedaba "atascado" como si se mantuviera
+      // apretado).
+      const dist = Math.hypot(dx, dy);
+      if (!dragRef.current.moved && (dist < 12 || performance.now() - startT < 80)) return;
       dragRef.current.moved = true;
       const nx = Math.max(2, Math.min(window.innerWidth - 82, originX + dx));
       const ny = Math.max(30, Math.min(window.innerHeight - 96, originY + dy));
